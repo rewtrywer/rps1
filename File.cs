@@ -24,18 +24,6 @@ namespace rps1
             return filePath;
         }
 
-        //private static string FormatCoefficient(double coefficient)
-        //{
-        //    if (coefficient < 0)
-        //    {
-        //        return $"- {-coefficient}";
-        //    }
-        //    else
-        //    {
-        //        return $"+ {coefficient}";
-        //    }
-        //}
-
         public static void SaveResultToFile(double[] array, double x)
         {
             string filePath = GetFilePath();
@@ -52,12 +40,8 @@ namespace rps1
 
                 if (answer.ToLower() == "y")
                 {
-                   // string formattedEquation = $"{FormatCoefficient(a)}x^3 {FormatCoefficient(b)}x^2 {FormatCoefficient(c)}x {FormatCoefficient(d)}";
-
                     using (StreamWriter writer = new StreamWriter(filePath, false))
                     {
-                        //writer.WriteLine(formattedEquation);
-                        //writer.WriteLine("Ответ: " + x);
                         writer.WriteLine(a);
                         writer.WriteLine(b);
                         writer.WriteLine(c);
@@ -75,17 +59,8 @@ namespace rps1
             }
             else
             {
-                //string formattedEquation = $"{FormatCoefficient(a)}x^3 {FormatCoefficient(b)}x^2 {FormatCoefficient(c)}x {FormatCoefficient(d)}";
-
-                //using (StreamWriter writer = new StreamWriter(filePath, false))
-                //{
-                //    writer.WriteLine(formattedEquation);
-                //    writer.WriteLine("Ответ: " + x);
-                //}
                 using (StreamWriter writer = new StreamWriter(filePath, false))
                 {
-                    //writer.WriteLine(formattedEquation);
-                    //writer.WriteLine("Ответ: " + x);
                     writer.WriteLine(a);
                     writer.WriteLine(b);
                     writer.WriteLine(c);
@@ -114,7 +89,6 @@ namespace rps1
 
                 if (answer.ToLower() == "y")
                 {
-                   // string formattedEquation = $"{FormatCoefficient(a)}x^3 {FormatCoefficient(b)}x^2 {FormatCoefficient(c)}x {FormatCoefficient(d)}";
 
                     using (StreamWriter writer = new StreamWriter(filePath, false))
                     {
@@ -137,13 +111,6 @@ namespace rps1
             }
             else
             {
-                //string formattedEquation = $"{FormatCoefficient(a)}x^3 {FormatCoefficient(b)}x^2 {FormatCoefficient(c)}x {FormatCoefficient(d)}";
-
-                //using (StreamWriter writer = new StreamWriter(filePath, false))
-                //{
-                //    writer.WriteLine(formattedEquation);
-                //    writer.WriteLine("Ответ: " + x);
-                //}
                 using (StreamWriter writer = new StreamWriter(filePath, false))
                 {
                     writer.WriteLine(a);
@@ -163,7 +130,6 @@ namespace rps1
             {
                 using (StreamReader reader = new StreamReader(filePath))
                 {
-                    //int size = int.Parse(reader.ReadLine());
                     for (int i = 0; i < 4; i++)
                     {
                         array = array.Concat(new double[] { double.Parse(reader.ReadLine()) }).ToArray();
@@ -183,7 +149,5 @@ namespace rps1
                 return (array, f);
             }
         }
-
-
     }
 }

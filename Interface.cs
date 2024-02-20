@@ -32,17 +32,21 @@ namespace rps1
 
         public static void GiveMainMenu()
         {
+            Console.WriteLine();
             Console.WriteLine("Выберите метод ввода данных:");
             Console.WriteLine("1. Ручной ввод");
             Console.WriteLine("2. Ввод из файла");
             Console.WriteLine("3. Выход");
+            Console.WriteLine();
         }
 
         public static void GiveSaveMenu()
         {
+            Console.WriteLine();
             Console.WriteLine("1. Сохранить результат");
             Console.WriteLine("2. Сохранить входные условия");
             Console.WriteLine("3. Главное меню");
+            Console.WriteLine();
         }
 
         public static void InstructionEquation()
@@ -60,11 +64,17 @@ namespace rps1
             /*Ввод с клавиатуры.*/
             for (int i = 0; i < size; i++)
             {
-               // Console.WriteLine("Элемент {0}", i);
-                //array[i] = Convert.ToInt32(Console.ReadLine());
                 array[i] = Checks.checkDouble();
             }
             return array;
+        }
+
+        public static void SeeArray(double[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine(array[i]);
+            }
         }
 
         public static void SaveMenu(double[] array, double[] conditions, double x)
@@ -91,7 +101,7 @@ namespace rps1
 
                         case item2.main:
 
-                            GiveMainMenu();
+                            methodChord();
 
                         break;
                     }
@@ -122,35 +132,36 @@ namespace rps1
                             InstructionConditions();
                             conditions = AddArray(3, conditions);
                             
-                            x = Calc.MethodChord(array, conditions);
-                            Console.WriteLine("Ответ: " + x);
-
+                            Calc.MethodChord(array, conditions);
                             
                             SaveMenu(array, conditions, x);
 
                         break;
 
                         case item1.file:
+                            Console.WriteLine();
                             string path = File.GetFilePath();
-                            File.AddArrayFromFile(array, conditions, path, Checks.IsValidFileForAddingArray(path));
-                            x = Calc.MethodChord(array, conditions);
-                            Console.WriteLine("Ответ: " + x);
 
+                            File.AddArrayFromFile(array, conditions, path, Checks.IsValidFileForAddingArray(path));
+                            Console.WriteLine();
+
+                            Console.WriteLine("Коэффециенты кубического уравнения:");
+                            SeeArray(array);
+                            Console.WriteLine();
+
+                            Console.WriteLine("Условия:");
+                            SeeArray(conditions);
+
+                            Calc.MethodChord(array, conditions);
 
                             SaveMenu(array, conditions, x);
 
-                            //(array, bool errFlag) = File.AddArrayFromFile(array, path, Checks.IsValidFileForAddingArray(path));
-                            //if (errFlag)
-                            //{
-                            //    //size = array.Count();
-                            //    //Array.Resize(ref SortArray, size);
+                            break;
 
-                            //    Sort.SortEvenOdd2(array, SortArray);
-                            //    SeeArray(size, array);
-                            //    Console.WriteLine("___________________");
-                            //    SeeArray(size, SortArray);
-                            //    Save(array, SortArray);
-                            //}
+                        case item1.exit:
+
+                            Environment.Exit(0);
+
                             break;
                     }
 

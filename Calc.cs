@@ -14,7 +14,7 @@ namespace rps1
             return result;
         }
 
-        public static double MethodChord(double[] array, double[] conditions)
+        public static void MethodChord(double[] array, double[] conditions)
         {
             double a = array[0];
             double b = array[1];
@@ -40,9 +40,9 @@ namespace rps1
                                                  (F(solution, a, b, c, d) - F(x0, a, b, c, d));
                     Console.WriteLine(Math.Abs(F(solution, a, b, c, d)) + " " + e + " " + solution);
                 }
+                Console.WriteLine("Ответ: " + solution);
             }  
 
-            return solution;
         }
     }
 

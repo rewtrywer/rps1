@@ -72,8 +72,6 @@ namespace rps1
             {
                 if (!sizeReader.EndOfStream)
                 {
-                    int size = int.Parse(sizeReader.ReadLine());
-
                     int sizeCehcker = 0;
 
                     while (!sizeReader.EndOfStream)
@@ -81,9 +79,9 @@ namespace rps1
                         var tempVal = sizeReader.ReadLine();
                         sizeCehcker++;
                     }
-                    if (sizeCehcker != size)
+                    if (sizeCehcker != 7)
                     {
-                        Console.WriteLine("Ошибка. Количество данных не совпадает с размером массива");
+                        Console.WriteLine("Ошибка. Количество данных не совпадает с условиями");
                         errFlag = false;
                         return errFlag;
                     }

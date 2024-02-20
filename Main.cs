@@ -12,10 +12,6 @@ namespace rps1
         {
             Interface.GiveWelcomeMessage();
             double x = Interface.methodChord();
-
-
         }
-        
-
     }
 }

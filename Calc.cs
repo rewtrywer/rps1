@@ -32,7 +32,6 @@ namespace rps1
             {
                 errflag = false;
                 return (solution, errflag);
-               // Console.WriteLine("Нет корней в данном интервале.");
             }
             else
             { 
@@ -41,9 +40,7 @@ namespace rps1
                 {
                     solution = x0 - F(x0, a, b, c, d) * (solution - x0) /
                                                  (F(solution, a, b, c, d) - F(x0, a, b, c, d));
-                    //Console.WriteLine(Math.Abs(F(solution, a, b, c, d)) + " " + e + " " + solution);
                 }
-                // Console.WriteLine("Ответ: " + solution);
                 return (solution, errflag);
             }  
         }

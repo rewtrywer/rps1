@@ -129,7 +129,7 @@ namespace rps1
                     double x = 0;
                     double result = 0;
                     bool errFlagCalc = true;
-                    
+                    bool errFlagFile = true;
 
                     switch (solution){
                         case item1.manual:
@@ -154,20 +154,14 @@ namespace rps1
                         case item1.file:
                             Console.WriteLine();
                             string path = File.GetFilePath();
-                            // bool flag = Checks.IsValidFileForAddingArray(path);
-
-                            
-                            (array, conditions, bool errFlagFile) = File.AddArrayFromFile(array, conditions, path, Checks.IsValidFileForAddingArray(path));
+ 
+                            (array, conditions, errFlagFile) = File.AddArrayFromFile(array, conditions, path, Checks.IsValidFileForAddingArray(path));
                             if (errFlagFile)
                             {
                                 Console.WriteLine();
-                               // SeeArray(array);
                                 Console.WriteLine("Коэффециенты кубического уравнения:");
                                 SeeArray(array);
-                                //Array.Resize(ref array, 4);
-                                //Array.Resize(ref conditions, 3);
                                 Console.WriteLine();
-
                                 Console.WriteLine("Условия:");
                                 SeeArray(conditions);
 
@@ -188,10 +182,9 @@ namespace rps1
 
                         case item1.test:
                             Console.WriteLine();
-                            //bool f = obj.MethodChord_WhenRootExists_ReturnsCorrectSolutionAndFlag();
-                            bool f = MathFunctionsTests.MethodChord_WhenRootExists_ReturnsCorrectSolutionAndFlag();
-                            bool e = MathFunctionsTests.MethodChord_WhenNoRootInInterval_ReturnsFlagAndNoSolution();
-                            if (f && e)
+                            bool test1 = MathFunctionsTests.MethodChord_WhenRootExists_ReturnsCorrectSolutionAndFlag();
+                            bool test2 = MathFunctionsTests.MethodChord_WhenNoRootInInterval_ReturnsFlagAndNoSolution();
+                            if (test1 && test2)
                             {
                                 Console.WriteLine("Тест пройден.");
                             }

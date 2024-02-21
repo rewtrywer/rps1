@@ -20,6 +20,7 @@ namespace rps1
         {
             manual = 1,
             file,
+            test,
             exit
         }
 
@@ -36,7 +37,8 @@ namespace rps1
             Console.WriteLine("Выберите метод ввода данных:");
             Console.WriteLine("1. Ручной ввод");
             Console.WriteLine("2. Ввод из файла");
-            Console.WriteLine("3. Выход");
+            Console.WriteLine("3. Тестирование");
+            Console.WriteLine("4. Выход");
             Console.WriteLine();
         }
 
@@ -59,8 +61,9 @@ namespace rps1
             Console.WriteLine("Введите последоватьельно первое приближение, второе приближение, погрешность:");
         }
 
-        public static double[] AddArray(int size, double[] array)
+        public static double[] AddArray( double[] array)
         {
+            int size = array.Length;
             /*Ввод с клавиатуры.*/
             for (int i = 0; i < size; i++)
             {
@@ -113,48 +116,87 @@ namespace rps1
 
         public static double methodChord()
         {
+
+           // MathFunctionsTests obj = new MathFunctionsTests();
             while (true)
             {
                 GiveMainMenu();
-                if (int.TryParse(Console.ReadLine(), out int choice) && choice <= 3 && choice >= 1)
+                if (int.TryParse(Console.ReadLine(), out int choice) && choice <= 4 && choice >= 1)
                 {
                     item1 solution = (item1) choice;
-                    double[] array = new double[4];
-                    double[] conditions = new double[3];
+                    double[] array = new double[0];
+                    double[] conditions = new double[0];
                     double x = 0;
+                    double result = 0;
+                    bool errFlagCalc = true;
                     
+
                     switch (solution){
                         case item1.manual:
-
+                            Array.Resize(ref array, 4);
+                            Array.Resize(ref conditions, 3);
                             InstructionEquation();
-                            array = AddArray(4, array);
+                            array = AddArray(array);
 
                             InstructionConditions();
-                            conditions = AddArray(3, conditions);
-                            
-                            Calc.MethodChord(array, conditions);
-                            
+                            conditions = AddArray(conditions);
+
+                            (result, errFlagCalc) = Calc.MethodChord(array, conditions);
+                            if (errFlagCalc)
+                                Console.WriteLine("Ответ: " + result);
+                            else
+                                Console.WriteLine("Нет корней на данном интервале.");
+
                             SaveMenu(array, conditions, x);
 
-                        break;
+                            break;
 
                         case item1.file:
                             Console.WriteLine();
                             string path = File.GetFilePath();
+                            // bool flag = Checks.IsValidFileForAddingArray(path);
 
-                            File.AddArrayFromFile(array, conditions, path, Checks.IsValidFileForAddingArray(path));
+                            
+                            (array, conditions, bool errFlagFile) = File.AddArrayFromFile(array, conditions, path, Checks.IsValidFileForAddingArray(path));
+                            if (errFlagFile)
+                            {
+                                Console.WriteLine();
+                               // SeeArray(array);
+                                Console.WriteLine("Коэффециенты кубического уравнения:");
+                                SeeArray(array);
+                                //Array.Resize(ref array, 4);
+                                //Array.Resize(ref conditions, 3);
+                                Console.WriteLine();
+
+                                Console.WriteLine("Условия:");
+                                SeeArray(conditions);
+
+                                (result, errFlagCalc) = Calc.MethodChord(array, conditions);
+                                if (errFlagCalc)
+                                {
+                                    Console.WriteLine("Ответ: " + result);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Нет корней на данном интервале.");
+                                }
+
+                                SaveMenu(array, conditions, x);
+                            }
+
+                            break;
+
+                        case item1.test:
                             Console.WriteLine();
-
-                            Console.WriteLine("Коэффециенты кубического уравнения:");
-                            SeeArray(array);
-                            Console.WriteLine();
-
-                            Console.WriteLine("Условия:");
-                            SeeArray(conditions);
-
-                            Calc.MethodChord(array, conditions);
-
-                            SaveMenu(array, conditions, x);
+                            //bool f = obj.MethodChord_WhenRootExists_ReturnsCorrectSolutionAndFlag();
+                            bool f = MathFunctionsTests.MethodChord_WhenRootExists_ReturnsCorrectSolutionAndFlag();
+                            bool e = MathFunctionsTests.MethodChord_WhenNoRootInInterval_ReturnsFlagAndNoSolution();
+                            if (f && e)
+                            {
+                                Console.WriteLine("Тест пройден.");
+                            }
+                            else
+                                Console.WriteLine("Тест не пройден.");
 
                             break;
 

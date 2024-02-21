@@ -124,7 +124,7 @@ namespace rps1
             }
         }
 
-        public static (double[] array, bool errFlag) AddArrayFromFile(double[] array, double[] conditions, string filePath, bool f)
+        public static (double[] array, double[] conditions, bool errFlag) AddArrayFromFile(double[] array, double[] conditions, string filePath, bool f)
         {
             if (f)
             {
@@ -141,13 +141,34 @@ namespace rps1
                     }
 
                 }
-                return (array, f);
+                return (array, conditions, f);
             }
             else
             {
                 Console.WriteLine("Добавлен пустой массив");
-                return (array, f);
+                return (array, conditions, f);
             }
         }
+
+        //public static (double[] array, bool errFlag) AddArrayFromFile(double[] array, string filePath, bool f)
+        //{
+        //    if (f)
+        //    {
+        //        using (StreamReader reader = new StreamReader(filePath))
+        //        {
+        //            //int size = int.Parse(reader.ReadLine());
+        //            for (int i = 0; i < 4; i++)
+        //            {
+        //                array = array.Concat(new double[] { int.Parse(reader.ReadLine()) }).ToArray();
+        //            }
+        //        }
+        //        return (array, f);
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Добавлен пустой массив");
+        //        return (array, f);
+        //    }
+        //}
     }
 }

@@ -14,7 +14,7 @@ namespace rps1
             return result;
         }
 
-        public static void MethodChord(double[] array, double[] conditions)
+        public static (double solution, bool errflag) MethodChord(double[] array, double[] conditions)
         {
             double a = array[0];
             double b = array[1];
@@ -26,10 +26,13 @@ namespace rps1
 
             // Начать с предположения, что корень находится в середине интервала.
             double solution = (x0 + x1) / 2;
+            bool errflag = true;
 
             if (F(x0, a, b, c, d) * F(x1, a, b, c, d) > 0)
             {
-                Console.WriteLine("Нет корней в данном интервале.");
+                errflag = false;
+                return (solution, errflag);
+               // Console.WriteLine("Нет корней в данном интервале.");
             }
             else
             { 
@@ -38,11 +41,11 @@ namespace rps1
                 {
                     solution = x0 - F(x0, a, b, c, d) * (solution - x0) /
                                                  (F(solution, a, b, c, d) - F(x0, a, b, c, d));
-                    Console.WriteLine(Math.Abs(F(solution, a, b, c, d)) + " " + e + " " + solution);
+                    //Console.WriteLine(Math.Abs(F(solution, a, b, c, d)) + " " + e + " " + solution);
                 }
-                Console.WriteLine("Ответ: " + solution);
+                // Console.WriteLine("Ответ: " + solution);
+                return (solution, errflag);
             }  
-
         }
     }
 

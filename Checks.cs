@@ -46,6 +46,7 @@ namespace rps1
         public static bool IsValidFileForAddingArray(string filePath)
         {
             bool errFlag = true;
+           // Console.WriteLine("!!!!!!!!!!!!!!!!!!!");
 
             if (!System.IO.File.Exists(filePath))
             {

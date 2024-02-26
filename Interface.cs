@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rps1
 {
@@ -13,7 +8,7 @@ namespace rps1
         {
             Console.WriteLine("Добро пожаловать!");
             Console.WriteLine("Вариант №3 работы №1 был выполнен студенткой группы 423 Барановой Ариной.");
-            Console.WriteLine("Задание: Отсортировать массив так, чтобы все чётные элементы были слева, а нечётные справа.");
+            Console.WriteLine("Задание: Решить уравнение методом хорд.");
         }
 
         enum item1
@@ -130,6 +125,8 @@ namespace rps1
                     double result = 0;
                     bool errFlagCalc = true;
                     bool errFlagFile = true;
+                    bool areEqual = true;
+                    double[] zeroArrayCoeff = new double[] { 0, 0, 0, 0 };
 
                     switch (solution){
                         case item1.manual:
@@ -137,17 +134,32 @@ namespace rps1
                             Array.Resize(ref conditions, 3);
                             InstructionEquation();
                             array = AddArray(array);
+                           
+                            areEqual = array.SequenceEqual(zeroArrayCoeff);
+                            if (!areEqual)
+                            {
+                                InstructionConditions();
+                                conditions = AddArray(conditions);
+                                if (conditions[0] >= conditions[1])
+                                {
+                                    Console.WriteLine("Некорректные данные.");
+                                }
+                                else
+                                {
+                                    (result, errFlagCalc) = Calc.MethodChord(array, conditions);
+                                    if (errFlagCalc)
+                                        Console.WriteLine("Ответ: " + result);
+                                    else
+                                        Console.WriteLine("Нет корней на данном интервале.");
 
-                            InstructionConditions();
-                            conditions = AddArray(conditions);
-
-                            (result, errFlagCalc) = Calc.MethodChord(array, conditions);
-                            if (errFlagCalc)
-                                Console.WriteLine("Ответ: " + result);
+                                    SaveMenu(array, conditions, x);
+                                }
+                            }
                             else
-                                Console.WriteLine("Нет корней на данном интервале.");
-
-                            SaveMenu(array, conditions, x);
+                            {
+                                Console.WriteLine("Некорректные данные.");
+                                
+                            }
 
                             break;
 
@@ -158,24 +170,32 @@ namespace rps1
                             (array, conditions, errFlagFile) = File.AddArrayFromFile(array, conditions, path, Checks.IsValidFileForAddingArray(path));
                             if (errFlagFile)
                             {
-                                Console.WriteLine();
-                                Console.WriteLine("Коэффециенты кубического уравнения:");
-                                SeeArray(array);
-                                Console.WriteLine();
-                                Console.WriteLine("Условия:");
-                                SeeArray(conditions);
-
-                                (result, errFlagCalc) = Calc.MethodChord(array, conditions);
-                                if (errFlagCalc)
+                                areEqual = array.SequenceEqual(zeroArrayCoeff);
+                                if (!areEqual && (conditions[0] < conditions[1]))
                                 {
-                                    Console.WriteLine("Ответ: " + result);
+                                    Console.WriteLine();
+                                    Console.WriteLine("Коэффециенты кубического уравнения:");
+                                    SeeArray(array);
+                                    Console.WriteLine();
+                                    Console.WriteLine("Условия:");
+                                    SeeArray(conditions);
+
+                                    (result, errFlagCalc) = Calc.MethodChord(array, conditions);
+                                    if (errFlagCalc)
+                                    {
+                                        Console.WriteLine("Ответ: " + result);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Нет корней на данном интервале.");
+                                    }
+
+                                    SaveMenu(array, conditions, x);
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Нет корней на данном интервале.");
+                                    Console.WriteLine("Некорректные данные.");
                                 }
-
-                                SaveMenu(array, conditions, x);
                             }
 
                             break;

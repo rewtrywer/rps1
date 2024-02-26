@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rps1
 {
@@ -58,7 +54,7 @@ namespace rps1
             {
                 while (!formatReader.EndOfStream)
                 {
-                    bool result = int.TryParse(formatReader.ReadLine(), out var temp);
+                    bool result = double.TryParse(formatReader.ReadLine(), out var temp);
                     if (result == false)
                     {
                         Console.WriteLine("Ошибка. В файле некорректные данные");

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace rps1
 {
@@ -124,9 +120,9 @@ namespace rps1
             }
         }
 
-        public static (double[] array, double[] conditions, bool errFlag) AddArrayFromFile(double[] array, double[] conditions, string filePath, bool f)
+        public static (double[] array, double[] conditions, bool errFlag) AddArrayFromFile(double[] array, double[] conditions, string filePath, bool errFalgFile)
         {
-            if (f)
+            if (errFalgFile)
             {
                 using (StreamReader reader = new StreamReader(filePath))
                 {
@@ -141,12 +137,12 @@ namespace rps1
                     }
 
                 }
-                return (array, conditions, f);
+                return (array, conditions, errFalgFile);
             }
             else
             {
                 Console.WriteLine("Добавлен пустой массив");
-                return (array, conditions, f);
+                return (array, conditions, errFalgFile);
             }
         }
 
